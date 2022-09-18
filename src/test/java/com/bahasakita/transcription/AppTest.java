@@ -1,4 +1,4 @@
-package com.bahasakita.segmentor;
+package com.bahasakita.transcription;
 
 import static org.junit.Assert.assertTrue;
 

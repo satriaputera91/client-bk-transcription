@@ -1,4 +1,3 @@
-/home/stria/Program/Personal/audio-segmentor/src/main/java/com/bahasakita/segmentor/AudioSegmentor.java
-/home/stria/Program/Personal/audio-segmentor/src/main/java/com/bahasakita/segmentor/AudioSegmentorHandler.java
-/home/stria/Program/Personal/audio-segmentor/src/main/java/com/bahasakita/segmentor/AudioProcessing.java
-/home/stria/Program/Personal/audio-segmentor/src/main/java/com/bahasakita/example/App.java
+/home/stria/Program/Personal/client-bk-transcription/src/main/java/com/bahasakita/transcription/Subscriber.java
+/home/stria/Program/Personal/client-bk-transcription/src/main/java/com/bahasakita/example/App.java
+/home/stria/Program/Personal/client-bk-transcription/src/main/java/com/bahasakita/transcription/Publisher.java

@@ -1,5 +1,6 @@
-com/bahasakita/segmentor/AudioProcessing.class
-com/bahasakita/example/App$1.class
-com/bahasakita/segmentor/AudioSegmentorHandler.class
-com/bahasakita/segmentor/AudioSegmentor.class
+com/bahasakita/transcription/Subscriber$1.class
+com/bahasakita/transcription/Subscriber.class
+com/bahasakita/transcription/Publisher$1.class
 com/bahasakita/example/App.class
+com/bahasakita/transcription/Subscriber$2.class
+com/bahasakita/transcription/Publisher.class
