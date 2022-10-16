@@ -1,10 +1,11 @@
-/home/stria/Program/Personal/client-bk-transcription/src/main/java/com/bahasakita/transcribe/WorkerSubscriber.java
+/home/stria/Program/Personal/client-bk-transcription/src/main/java/com/bahasakita/transcribe/module/WorkerSubscriber.java
 /home/stria/Program/Personal/client-bk-transcription/src/main/java/com/bahasakita/transcribe/nats/Publisher.java
 /home/stria/Program/Personal/client-bk-transcription/src/main/java/com/bahasakita/transcribe/nats/Topic.java
-/home/stria/Program/Personal/client-bk-transcription/src/main/java/com/bahasakita/transcribe/WorkerPublisher.java
-/home/stria/Program/Personal/client-bk-transcription/src/main/java/com/bahasakita/transcribe/AudioPublisher.java
+/home/stria/Program/Personal/client-bk-transcription/src/main/java/com/bahasakita/transcribe/module/AudioPublisher.java
 /home/stria/Program/Personal/client-bk-transcription/src/main/java/com/bahasakita/transcribe/ResponseHandler.java
+/home/stria/Program/Personal/client-bk-transcription/src/main/java/com/bahasakita/transcribe/module/TranscribeSubscriber.java
 /home/stria/Program/Personal/client-bk-transcription/src/main/java/com/bahasakita/example/App.java
-/home/stria/Program/Personal/client-bk-transcription/src/main/java/com/bahasakita/transcribe/TranscribeSubscriber.java
+/home/stria/Program/Personal/client-bk-transcription/src/main/java/com/bahasakita/transcribe/BKTranscribe.java
+/home/stria/Program/Personal/client-bk-transcription/src/main/java/com/bahasakita/transcribe/module/WorkerPublisher.java
 /home/stria/Program/Personal/client-bk-transcription/src/main/java/com/bahasakita/transcribe/nats/Subscriber.java
 /home/stria/Program/Personal/client-bk-transcription/src/main/java/com/bahasakita/transcribe/nats/InterfaceSubscriber.java

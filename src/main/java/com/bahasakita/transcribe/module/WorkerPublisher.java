@@ -1,10 +1,14 @@
-package com.bahasakita.transcribe;
+package com.bahasakita.transcribe.module;
+
+import java.util.logging.Logger;
 
 import com.bahasakita.transcribe.nats.Publisher;
 import com.bahasakita.transcribe.nats.Topic;
 import com.google.gson.JsonObject;
 
 public class WorkerPublisher {
+    private Logger logger = Logger.getLogger(WorkerPublisher.class.getName());
+
     private Topic topic;
     private Publisher publish;
     private boolean async = false;
@@ -18,10 +22,15 @@ public class WorkerPublisher {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println(String.format("Publisher Topic, URL :%s, Subject: %s, Cluster-Id: %s,Client-Id: %s",
+        // System.out.println(String.format("Publisher Topic, URL :%s, Subject: %s,
+        // Cluster-Id: %s,Client-Id: %s",
+        // this.topic.getUrl(),
+        // topic.getSubject(), topic.getClusterId(), topic.getClientId()));
+        
+        logger.info(String.format("Publisher Topic, URL :%s, Subject: %s, Cluster-Id: %s,Client-Id: %s",
                 this.topic.getUrl(),
                 topic.getSubject(), topic.getClusterId(), topic.getClientId()));
+
     }
 
     public void sendWorker(String utteranceID, String resultTopic, String responseTopic) {

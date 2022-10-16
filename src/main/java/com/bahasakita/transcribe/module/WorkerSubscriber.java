@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.bahasakita.transcribe;
+package com.bahasakita.transcribe.module;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -24,10 +24,10 @@ import com.google.gson.JsonParser;
 public class WorkerSubscriber implements InterfaceSubscriber {
     private boolean bStatus = false;
     private Subscriber subsciber;
-    private ResponseHandler handler ;
+ 
     private final CountDownLatch start = new CountDownLatch(1);
 
-    public WorkerSubscriber(Topic topic,ResponseHandler handler) {
+    public WorkerSubscriber(Topic topic) {
         this.subsciber = new Subscriber(topic);
         this.subsciber.setSubscriberHandler(this);
         try {
@@ -36,7 +36,7 @@ public class WorkerSubscriber implements InterfaceSubscriber {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        this.handler = handler;
+    
         
     }
 
@@ -60,16 +60,13 @@ public class WorkerSubscriber implements InterfaceSubscriber {
     @Override
     public void getMessage(String message) {
         JsonObject obj = new JsonParser().parse(message).getAsJsonObject();
-        String status;
         if (obj.get("status").getAsBoolean() == true) {
             bStatus = true;
-            status = "Success";
         } else {
-            status = "Failed";
             bStatus = false;
         }
         this.start.countDown();
-        this.handler.StatusWorker(status);
+    
     }
 
 }

@@ -22,8 +22,10 @@ import io.nats.streaming.Subscription;
 import io.nats.streaming.SubscriptionOptions;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CountDownLatch;
+import java.util.logging.Logger;
 
 public class Subscriber {
+    private Logger logger = Logger.getLogger(Subscriber.class.getName());
     private Topic topic;
     private final SubscriptionOptions.Builder builder = new SubscriptionOptions.Builder();
     private String qgroup;
@@ -60,15 +62,20 @@ public class Subscriber {
                     }
                     String data = new String(msg.getData(), StandardCharsets.UTF_8);
                     // System.out.printf("[#%d] Received on [%s]: '%s'\n",
-                    //         delivered.incrementAndGet(), msg.getSubject(),data);
+                    // delivered.incrementAndGet(), msg.getSubject(),data);
 
                     subscriberHandler.getMessage(data);
                 }
             }, builder.build());
 
-            System.out.printf("Listening on [%s], clientID=[%s], qgroup=[%s] durable=[%s]\n",
+            // System.out.printf("Listening on [%s], clientID=[%s], qgroup=[%s]
+            // durable=[%s]\n",
+            // sub.getSubject(), topic.getClientId(), sub.getQueue(),
+            // sub.getOptions().getDurableName());
+
+            logger.info(String.format("Listening on [%s], clientID=[%s], qgroup=[%s] durable=[%s]",
                     sub.getSubject(), topic.getClientId(), sub.getQueue(),
-                    sub.getOptions().getDurableName());
+                    sub.getOptions().getDurableName()));
 
             start.countDown();
 
@@ -81,7 +88,7 @@ public class Subscriber {
         try {
             if (durable == null || durable.isEmpty() || unsubscribe) {
                 this.sub.unsubscribe();
-            }            
+            }
             this.sc.close();
         } catch (Exception e) {
             e.printStackTrace();

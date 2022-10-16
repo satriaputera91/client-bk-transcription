@@ -21,8 +21,11 @@ import java.io.IOException;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeoutException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Publisher {
+    private Logger logger = Logger.getLogger(Publisher.class.getName());
     private Topic topic;
     private final CountDownLatch latch = new CountDownLatch(1);
     private final String[] guid = new String[1];
@@ -52,17 +55,23 @@ public class Publisher {
         AckHandler acb = new AckHandler() {
             @Override
             public void onAck(String nuid, Exception ex) {
-                System.out.printf("Received ACK for guid %s\n", nuid);
+                // System.out.printf("Received ACK for guid %s\n", nuid);
+                logger.info("Received ACK for guid " + nuid);
                 if (ex != null) {
-                    System.err.printf("Error in server ack for guid %s: %s", nuid,
-                            ex.getMessage());
+
+                    // System.err.printf("Error in server ack for guid %s: %s", nuid,
+                    // ex.getMessage());
+                    logger.log(Level.SEVERE, "Error in server ack for guid" + nuid + ":" + ex.getMessage());
+
                 }
                 if (!guid[0].equals(nuid)) {
-                    System.err.printf(
-                            "Expected a matching guid in ack callback, got %s vs %s\n", nuid,
+                    // System.err.printf(
+                    // "Expected a matching guid in ack callback, got %s vs %s\n", nuid,
+                    // guid[0]);
+                    logger.log(Level.SEVERE, "Expected a matching guid in ack callback, got" + nuid + ":" +
                             guid[0]);
                 }
-                System.out.flush();
+                // System.out.flush();
                 latch.countDown();
             }
         };
@@ -72,7 +81,8 @@ public class Publisher {
                 // noinspection ConstantConditions
                 sc.publish(topic.getSubject(), message);
             } catch (Exception e) {
-                System.err.printf("Error during publish: %s\n", e.getMessage());
+                // System.err.printf("Error during publish: %s\n", e.getMessage());
+                logger.log(Level.SEVERE, "Error during publish: " + e.getMessage());
                 throw (e);
             }
         } else {
@@ -81,17 +91,20 @@ public class Publisher {
                 guid[0] = sc.publish(topic.getSubject(), message, acb);
                 latch.await();
             } catch (IOException e) {
-                System.err.printf("Error during async publish: %s\n", e.getMessage());
+                logger.severe("Error during async publish:" + e.getMessage());
                 throw (e);
             }
 
             if (guid[0].isEmpty()) {
                 String msg = "Expected non-empty guid to be returned.";
                 System.err.println(msg);
+                logger.severe(msg);
                 throw new IOException(msg);
             }
-            System.out.printf("Published [%s] : [guid: %s]\n", topic.getSubject(),
-                    guid[0]);
+            // System.out.printf("Published [%s] : [guid: %s]\n", topic.getSubject(),
+            // guid[0]);
+            logger.info(String.format("Published [%s] : [guid: %s]", topic.getSubject(),
+                    guid[0]));
         }
 
     }
@@ -107,8 +120,8 @@ public class Publisher {
             throw (e);
         }
     }
-    
-    public void close(){
+
+    public void close() {
         try {
             this.sc.close();
         } catch (IOException | TimeoutException | InterruptedException e) {
